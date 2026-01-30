@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/auth/guard.php";
+require_once __DIR__ . "/auth/admin_guard.php";
 require_once __DIR__ . "/includes/db.php";
  
 $material_id = trim($_GET["material_id"] ?? "");

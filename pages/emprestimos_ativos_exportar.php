@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/auth/guard.php";
+require_once __DIR__ . "/auth/admin_guard.php";
 require_once __DIR__ . "/includes/db.php";
  
 // regra simples de atraso (dias)

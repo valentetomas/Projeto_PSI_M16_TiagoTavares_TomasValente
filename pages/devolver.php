@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . "/auth/guard.php";
 require_once __DIR__ . "/includes/db.php";
-require_once __DIR__ . "/includes/header.php";
-require_once __DIR__ . "/includes/navbar.php";
 require_once __DIR__ . "/includes/mensagens.php";
  
 $erro = "";
@@ -77,7 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !$erro) {
       $pdo->commit();
  
       set_mensagem("success", "Devolução registada com sucesso.");
-      header("Location: /Projeto_PSI_M16_TiagoTavares_TomasValente/pages/emprestimos_listar.php");
+      $is_admin = (($_SESSION["user_role"] ?? "") === "admin");
+      $redirect = $is_admin
+        ? "/Projeto_PSI_M16_TiagoTavares_TomasValente/pages/emprestimos_listar.php"
+        : "/Projeto_PSI_M16_TiagoTavares_TomasValente/pages/historico.php";
+      header("Location: " . $redirect);
       exit;
     } catch (Throwable $e) {
       if ($pdo->inTransaction()) $pdo->rollBack();
@@ -85,6 +87,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !$erro) {
     }
   }
 }
+?>
+
+<?php
+require_once __DIR__ . "/includes/header.php";
+require_once __DIR__ . "/includes/navbar.php";
 ?>
  
 <div class="container mt-4" style="max-width: 750px;">
